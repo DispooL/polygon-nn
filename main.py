@@ -5,7 +5,7 @@ from tensorflow import keras
 
 nn = keras.models.load_model("model.h5")
 
-
+loses = 0
 color = -1
 bet_amount = 2
 
@@ -26,6 +26,9 @@ while True:
 
     print("Data {}".format(data))
 
+    if loses >= 4:
+        time.sleep(600)
+    
     if data:
         if data[0]:
             if int(data[0]) == 0:
@@ -39,6 +42,7 @@ while True:
                 if color == rolled:
                     bet_amount = 2
                 else:
+                    loses += 1
                     bet_amount *= 2
 
             time.sleep(5)
