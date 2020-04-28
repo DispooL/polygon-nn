@@ -26,8 +26,8 @@ while True:
 
 
     if loses >= 5:
-        time.sleep(300)
-        loses = 0
+        print("Sleeping")
+        time.sleep(50*loses)
     
     if data:
         print("Data {}".format(data))
