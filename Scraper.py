@@ -17,13 +17,11 @@ class Scraper(object):
     def login(self,login,pass_):
         self.driver.get("https://csgopolygon.gg/?login")
 
-        time.sleep(60)
-
-        username = WebDriverWait(self.driver, 6).until(
+        username = WebDriverWait(self.driver, 200).until(
             EC.visibility_of_element_located((By.XPATH, "//input[@name='username']")))
-        password = WebDriverWait(self.driver, 6).until(
+        password = WebDriverWait(self.driver, 200).until(
             EC.visibility_of_element_located((By.XPATH, "//input[@name='password']")))
-        login_button = WebDriverWait(self.driver, 6).until(
+        login_button = WebDriverWait(self.driver, 200).until(
             EC.visibility_of_element_located((By.XPATH, "//div[@id='login_btn_signin']/input")))
 
         username.click()
@@ -86,7 +84,7 @@ class Scraper(object):
                 balls = self.driver.find_elements_by_xpath("//div[@id='past']/div")
 
                 for ball in balls:
-                    past_balls.append(ball.text)
+                    past_balls.append(int(ball.text))
 
                 return [rolled, past_balls]
 

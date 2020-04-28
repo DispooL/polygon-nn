@@ -24,12 +24,13 @@ while True:
     time.sleep(1)
     data = scraper.get_values()
 
-    print("Data {}".format(data))
 
-    if loses >= 4:
-        time.sleep(600)
+    if loses >= 5:
+        time.sleep(300)
+        loses = 0
     
     if data:
+        print("Data {}".format(data))
         if data[0]:
             if int(data[0]) == 0:
                 rolled = 0
@@ -40,14 +41,16 @@ while True:
 
             if color != -1:
                 if color == rolled:
+                    print("won")
                     bet_amount = 2
                 else:
+                    print("lose")
                     loses += 1
                     bet_amount *= 2
 
             time.sleep(5)
 
-            color = nn.predict([[data[1]]])
+            color = nn.predict([data[1]])
             color = np.argmax(color)
 
             if scraper.make_bet(bet_amount,color):
